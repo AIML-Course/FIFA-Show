@@ -1,12 +1,18 @@
 <html lang="en-US">
 <head>
     <title>AIML-FIFA</title>
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <link rel="icon" type="image/png" href="asset/favicon.png" />
+    <style>body {font: 10px sans-serif;}</style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js"></script>
+    <script type="text/javascript" src="script/apis.js"></script>
 </head>
 <body>
-	<div id="content" />
-	<a onclick="checkMatch('Wei', 1)">1</a>
-	<a onclick="checkMatch('Wei', 2)">2</a>
-    <script type="text/javascript" src="content.js"></script>
+    <div id="content" >
+        <button type="button" onclick="checkMatch('Wei', 1)">Melon<div id="melonform">4-4-2</div></button>
+        <button type="button" onclick="checkMatch('Wei', 2)">Drupe<div id="drupeform">4-4-2</div></button>
+        <button type="button" onclick="window.location.reload()">Refresh<div id="result">?</div></button>
+    </div>
+    <div id="figure" style="margin-bottom: 50px;" />
+    <script type="text/javascript" src="script/graph.js" ></script>
 </body>
 </html>
