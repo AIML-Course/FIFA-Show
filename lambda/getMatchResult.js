@@ -63,9 +63,10 @@ function versus(t1, t2) {
 const AWS = require('aws-sdk');
 const s3 = new AWS.S3();
 exports.handler = function(event, context, callback) {
-    console.log(event);
+    // console.log(event);
+    // console.log(context);
+    var body = JSON.parse(event.body);
     if(body && body.match) {
-        var body = JSON.parse(event.body);
         var checkMatch = {
             "team1": body.match.team1,
             "team2": body.match.team2
@@ -93,7 +94,7 @@ exports.handler = function(event, context, callback) {
                 if(err) {
                     console.log("[ERROR] " + JSON.stringify(err));
                     var resErr = {
-                        statusCode: 400,
+                        statusCode: 200,
                         headers: {
                             "Access-Control-Allow-Origin": "*"
                         },
@@ -114,7 +115,7 @@ exports.handler = function(event, context, callback) {
             });
         } else {
             callback(null, {
-                statusCode: 400,
+                statusCode: 200,
                 headers: {
                     "Access-Control-Allow-Origin": "*"
                 },
@@ -123,9 +124,11 @@ exports.handler = function(event, context, callback) {
         }
     } else {
         callback(null, {
-            statusCode: 400,
+            statusCode: 200,
             headers: {
-                "Access-Control-Allow-Origin": "*"
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Methods': '*',
+                "Access-Control-Allow-Origin": '*'
             },
             body: "no body"
         });
