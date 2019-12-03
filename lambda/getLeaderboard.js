@@ -36,7 +36,7 @@ function fileCascade(files, i, str, cb) {
 
 exports.handler = function(event, context, callback) {
     var dateObj = new Date();
-    // dateObj.setDate(dateObj.getDate() - 1);
+    dateObj.setDate(dateObj.getDate() - 1);
     var year = dateObj.getUTCFullYear();
     var month = dateObj.getUTCMonth() + 1; //months 1-12
     var day = dateObj.getUTCDate();

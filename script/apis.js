@@ -34,7 +34,9 @@ function formation(match) {
 }
 function setResult(result) {
     document.getElementById("result").innerHTML =
-        "Melon:" + result.t1Score + " Drupe:" + result.t2Score;
+        "Match Result: Melon:" + result.t1Score + " Drupe:" + result.t2Score;
+    document.getElementById("btnmelon").disabled = true;
+    document.getElementById("btndrupe").disabled = true;
 }
 var match = null;
 var req1 = new XMLHttpRequest();
@@ -72,7 +74,7 @@ req2.onerror = function() {
 };
 req2.send();
 
-function checkMatch(name, select) {
+function checkMatchName(name, select) {
     if(match == null) {
         console.log("ERROR: Not Ready");
     } else {
@@ -95,4 +97,8 @@ function checkMatch(name, select) {
             console.log("ERROR: Server Connection");
         };
     }
-};
+}
+
+function checkMatch(select) {
+    checkMatchName(document.getElementById("myText").value, select);
+}

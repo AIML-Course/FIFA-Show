@@ -8,9 +8,19 @@
 </head>
 <body>
     <div id="content" >
-        <button type="button" onclick="checkMatch('Wei', 1)">Melon<div id="melonform">4-4-2</div></button>
-        <button type="button" onclick="checkMatch('Wei', 2)">Drupe<div id="drupeform">4-4-2</div></button>
-        <button type="button" onclick="window.location.reload()">Refresh<div id="result">?</div></button>
+        <h1>Which Team is Gonna WIN!?</h1>
+        <h2>
+            Player Name: <input type="text" id="myText" value="Wei">
+        </h2>
+        <h2 id="result">Match Result: ?</h2>
+        <br/>
+        <button id="btnmelon" type="button" onclick="checkMatch(1)">
+            <h2>Melon<div id="melonform">4-4-2</div></h2>
+        </button>
+        <button id="btndrupe" type="button" onclick="checkMatch(2)">
+            <h2>Drupe<div id="drupeform">4-4-2</div></h2>
+        </button>
+        <button type="button" onclick="window.location.reload()">Refresh</button>
     </div>
     <div id="figure" style="margin-bottom: 50px;" />
     <script type="text/javascript" src="script/graph.js" ></script>
