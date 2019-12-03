@@ -39,9 +39,9 @@ function setResult(result) {
     document.getElementById("btndrupe").disabled = true;
 }
 var match = null;
-var req1 = new XMLHttpRequest();
-req1.open('GET', 'https://kwtw3f5wyf.execute-api.ap-northeast-1.amazonaws.com/default/getMatchAttributes', true);
-req1.onload = function() {
+var req = new XMLHttpRequest();
+req.open('GET', 'https://kwtw3f5wyf.execute-api.ap-northeast-1.amazonaws.com/default/getMatchAttributes', true);
+req.onload = function() {
     if(this.status >= 200 && this.status < 400) {
         match = JSON.parse(this.response);
         var exactMatch = organize(match);
@@ -53,26 +53,35 @@ req1.onload = function() {
         console.log("ERROR: Return");
     }
 };
-req1.onerror = function() {
+req.onerror = function() {
     console.log("ERROR: Server Connection");
 };
-req1.send();
+req.send();
 
-var req2 = new XMLHttpRequest();
-req2.open('GET', 'https://em59r6sev4.execute-api.ap-northeast-1.amazonaws.com/default/getLeaderboard', true);
-req2.onload = function() {
+var reql = new XMLHttpRequest();
+var leader = [];
+reql.open('GET', 'https://em59r6sev4.execute-api.ap-northeast-1.amazonaws.com/default/getLeaderboard', true);
+reql.onload = function() {
     console.log(this);
     if(this.status >= 200 && this.status < 400) {
-        var leader = this.response;
+        leader = this.response.split('\n').map(s => {
+            var l = s.split(',');
+            return {
+                "name": l[0],
+                "score": parseInt(l[1])
+            };
+        }).filter(o => !isNaN(o.score)).sort((a, b) =>
+            b.score - a.score
+        ).map(o => o.name + " : " + o.score);
         console.log(leader);
     } else {
         console.log("ERROR: Return");
     }
 };
-req2.onerror = function() {
+reql.onerror = function() {
     console.log("ERROR: Server Connection");
 };
-req2.send();
+reql.send();
 
 function checkMatchName(name, select) {
     if(match == null) {
@@ -98,7 +107,9 @@ function checkMatchName(name, select) {
         };
     }
 }
-
 function checkMatch(select) {
     checkMatchName(document.getElementById("myText").value, select);
+}
+function checkLeader() {
+    alert(leader.join("\n"));
 }
